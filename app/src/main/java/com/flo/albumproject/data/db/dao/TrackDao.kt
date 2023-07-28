@@ -5,24 +5,24 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.flo.albumproject.data.entities.TrackEntities
+import com.flo.albumproject.data.entities.TrackEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TrackDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(track: TrackEntities)
+    suspend fun insert(track: TrackEntity)
 
     @Insert
-    fun insertAll(vararg tracks: TrackEntities)
+    fun insertAll(vararg tracks: TrackEntity)
 
     @Query("SELECT * FROM track")
-    fun getAll(): Flow<List<TrackEntities>>
+    fun getAll(): Flow<List<TrackEntity>>
 
     @Query("SELECT * FROM track WHERE album_id = :albumId")
-    fun getAllWithAlbumId(albumId: Int): Flow<List<TrackEntities>>
+    fun getAllWithAlbumId(albumId: Int): Flow<List<TrackEntity>>
 
     @Delete
-    suspend fun delete(track: TrackEntities)
+    suspend fun delete(track: TrackEntity)
 }

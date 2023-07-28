@@ -6,10 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.flo.albumproject.data.db.dao.TrackDao
-import com.flo.albumproject.data.entities.TrackEntities
+import com.flo.albumproject.data.entities.TrackEntity
 
-@Database(entities = [TrackEntities::class], version = 1, exportSchema = false)
-@TypeConverters(Converters::class)
+@Database(entities = [TrackEntity::class], version = 1, exportSchema = false)
+//@TypeConverters(Converters::class)
 abstract class ProjectDatabase : RoomDatabase() {
 
     abstract fun trackDao(): TrackDao

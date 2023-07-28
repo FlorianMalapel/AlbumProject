@@ -9,6 +9,6 @@ import retrofit2.http.Query
 interface TechnicalTestApi {
 
     @GET("img/shared/technical-test.json")
-    suspend fun getAlbums(): List<TrackResponse>
+    suspend fun getAlbums(): Response<List<TrackResponse>>
 
 }

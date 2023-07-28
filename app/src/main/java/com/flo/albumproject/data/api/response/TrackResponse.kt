@@ -8,16 +8,16 @@ data class TrackResponse(
     @Json(name = "id")
     val id: Int,
 
-    @Json(name = "album_id")
+    @Json(name = "albumId")
     val albumId: Int,
 
     @Json(name = "title")
     val title: String,
 
     @Json(name = "url")
-    val url: Int,
+    val url: String,
 
-    @Json(name = "thumbnail_url")
-    val thumbnailUrl: Int,
+    @Json(name = "thumbnailUrl")
+    val thumbnailUrl: String,
 
 )

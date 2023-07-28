@@ -5,4 +5,4 @@ import androidx.room.TypeConverter
 /**
  * Here we can find the converters for the database if there is any
  */
-class Converters {}
+//class Converters {}

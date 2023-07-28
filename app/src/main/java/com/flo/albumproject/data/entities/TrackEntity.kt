@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "track")
-data class TrackEntities(
+data class TrackEntity(
 
     @PrimaryKey
     @ColumnInfo(name = "id")
