@@ -11,8 +11,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.flo.albumproject.presentation.composables.CatalogComponent
+import com.flo.albumproject.presentation.theme.AlbumProjectTheme
 import com.flo.albumproject.presentation.viewmodel.AlbumViewModel
-import com.flo.albumproject.ui.theme.AlbumProjectTheme
 
 class MainActivity : ComponentActivity() {
 
@@ -29,9 +30,8 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    CatalogComponent(liveAlbums = albumViewModel.liveAlbums)
                 }
             }
         }
