@@ -5,7 +5,7 @@ import com.flo.albumproject.domain.entities.Track
 
 sealed class NetworkResult {
     data class Success(
-        val albums: List<Track>?
+        val tracks: List<Track>?
     ) : NetworkResult()
 
     object Error : NetworkResult()

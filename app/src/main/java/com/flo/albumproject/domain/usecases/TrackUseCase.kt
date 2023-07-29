@@ -4,12 +4,12 @@ import com.flo.albumproject.domain.entities.Track
 import com.flo.albumproject.domain.repositories.TrackRepository
 import kotlinx.coroutines.flow.Flow
 
-class AlbumUseCase(private val trackRepository: TrackRepository) {
+class TrackUseCase(private val trackRepository: TrackRepository) {
 
     suspend fun getRemote(): NetworkResult {
         val result = trackRepository.getRemote()
         if (result is NetworkResult.Success) {
-            result.albums?.let { tracks ->
+            result.tracks?.let { tracks ->
                 trackRepository.save(tracks)
             }
         }
