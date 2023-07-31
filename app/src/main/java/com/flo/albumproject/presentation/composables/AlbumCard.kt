@@ -1,10 +1,6 @@
 package com.flo.albumproject.presentation.composables
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -29,9 +25,9 @@ import com.flo.albumproject.presentation.theme.md_theme_dark_secondaryContainer
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AlbumCard(album: Album, onClick: () -> Unit) {
+fun AlbumCard(modifier: Modifier, album: Album, onClick: () -> Unit) {
     Card(
-        modifier = Modifier.height(200.dp),
+        modifier = modifier,
         colors = CardDefaults.cardColors(containerColor = md_theme_dark_secondaryContainer),
         shape = RoundedCornerShape(5.dp),
         onClick = onClick

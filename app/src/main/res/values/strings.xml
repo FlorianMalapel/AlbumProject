@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AlbumProject</string>
+    <string name="title_albums">Albums</string>
 </resources>

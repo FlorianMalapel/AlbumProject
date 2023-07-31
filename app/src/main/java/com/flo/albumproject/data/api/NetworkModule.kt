@@ -31,7 +31,7 @@ class NetworkModule {
 
     private val loggingInterceptor by lazy {
         val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        loggingInterceptor.level = HttpLoggingInterceptor.Level.HEADERS
         loggingInterceptor
     }
 
