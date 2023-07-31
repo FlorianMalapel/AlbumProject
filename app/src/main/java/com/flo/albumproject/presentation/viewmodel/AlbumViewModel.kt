@@ -50,7 +50,7 @@ class AlbumViewModel(
                 continue
             }
             val albumIndex = albums.indexOfFirst { it.id == track.albumId }
-            albums[albumIndex].tracks.add(track)
+            albums[albumIndex].tracks?.add(track)
         }
         return albums
     }

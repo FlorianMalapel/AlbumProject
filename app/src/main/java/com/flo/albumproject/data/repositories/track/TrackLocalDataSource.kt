@@ -7,17 +7,17 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 interface TrackLocalDataSource {
-    fun getAll(): Flow<List<Track>>
+    suspend fun getAll(): Flow<List<Track>>
 
-    fun saveAll(tracks: List<Track>)
+    suspend fun saveAll(tracks: List<Track>)
 }
 
 class TrackLocalDataSourceImpl(
-    val trackDao: TrackDao,
-    val trackMapper: TrackEntityMapper
+    private val trackDao: TrackDao,
+    private val trackMapper: TrackEntityMapper
 ) : TrackLocalDataSource {
 
-    override fun getAll(): Flow<List<Track>> {
+    override suspend fun getAll(): Flow<List<Track>> {
         return trackDao.getAll().map { trackEntities ->
             trackEntities.map { entity ->
                 trackMapper.toTrack(entity = entity)
@@ -25,7 +25,7 @@ class TrackLocalDataSourceImpl(
         }
     }
 
-    override fun saveAll(tracks: List<Track>) {
+    override suspend fun saveAll(tracks: List<Track>) {
         trackDao.insertAll(
             *tracks.map { track ->
                 trackMapper.toTrackEntity(track)

@@ -5,14 +5,17 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.flo.albumproject.data.db.dao.AlbumDao
 import com.flo.albumproject.data.db.dao.TrackDao
+import com.flo.albumproject.data.entities.AlbumEntity
 import com.flo.albumproject.data.entities.TrackEntity
 
-@Database(entities = [TrackEntity::class], version = 1, exportSchema = false)
-//@TypeConverters(Converters::class)
+@Database(entities = [AlbumEntity::class, TrackEntity::class], version = 1, exportSchema = false)
+@TypeConverters(Converters::class)
 abstract class ProjectDatabase : RoomDatabase() {
 
     abstract fun trackDao(): TrackDao
+    abstract fun albumDao(): AlbumDao
 
     companion object {
         @Volatile

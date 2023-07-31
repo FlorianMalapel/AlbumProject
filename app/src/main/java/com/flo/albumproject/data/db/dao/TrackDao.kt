@@ -15,7 +15,7 @@ interface TrackDao {
     suspend fun insert(track: TrackEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg tracks: TrackEntity)
+    suspend fun insertAll(vararg tracks: TrackEntity)
 
     @Query("SELECT * FROM track")
     fun getAll(): Flow<List<TrackEntity>>
