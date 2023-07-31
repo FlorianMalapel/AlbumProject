@@ -35,7 +35,3 @@ val Typography = Typography(
     )
     */
 )
-
-val NumberFont = FontFamily(
-    Font(R.font.neonderthaw_regular, weight = FontWeight.Normal, style = FontStyle.Normal),
-)

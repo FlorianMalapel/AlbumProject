@@ -1,66 +1,42 @@
 package com.flo.albumproject.presentation.theme
 
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
 
-val md_theme_light_primary = Color(0xFF00658D)
-val md_theme_light_onPrimary = Color(0xFFFFFFFF)
-val md_theme_light_primaryContainer = Color(0xFFC6E7FF)
-val md_theme_light_onPrimaryContainer = Color(0xFF001E2D)
-val md_theme_light_secondary = Color(0xFF00658D)
-val md_theme_light_onSecondary = Color(0xFFFFFFFF)
-val md_theme_light_secondaryContainer = Color(0xFFC6E7FF)
-val md_theme_light_onSecondaryContainer = Color(0xFF001E2E)
-val md_theme_light_tertiary = Color(0xFF5954A8)
-val md_theme_light_onTertiary = Color(0xFFFFFFFF)
-val md_theme_light_tertiaryContainer = Color(0xFFE3DFFF)
-val md_theme_light_onTertiaryContainer = Color(0xFF130463)
-val md_theme_light_error = Color(0xFFBA1A1A)
-val md_theme_light_onError = Color(0xFFFFFFFF)
-val md_theme_light_errorContainer = Color(0xFFFFDAD6)
-val md_theme_light_onErrorContainer = Color(0xFF410002)
-val md_theme_light_outline = Color(0xFF7D747D)
-val md_theme_light_background = Color(0xFFFFFBFF)
-val md_theme_light_onBackground = Color(0xFF1E1B1E)
-val md_theme_light_surface = Color(0xFFFFF7FB)
-val md_theme_light_onSurface = Color(0xFF1E1B1E)
-val md_theme_light_surfaceVariant = Color(0xFFEBDFE9)
-val md_theme_light_onSurfaceVariant = Color(0xFF4C444D)
-val md_theme_light_inverseSurface = Color(0xFF332F33)
-val md_theme_light_inverseOnSurface = Color(0xFFF6EFF3)
-val md_theme_light_inversePrimary = Color(0xFF82CFFF)
-val md_theme_light_surfaceTint = Color(0xFF00658D)
-val md_theme_light_outlineVariant = Color(0xFFCEC3CD)
-val md_theme_light_scrim = Color(0xFF000000)
+@Immutable
+data class ProjectColors(
+    val primary: Color,
+    val primaryVariant: Color,
 
-val md_theme_dark_primary = Color(0xFF82CFFF)
-val md_theme_dark_onPrimary = Color(0xFF00344B)
-val md_theme_dark_primaryContainer = Color(0xFF004C6B)
-val md_theme_dark_onPrimaryContainer = Color(0xFFC6E7FF)
-val md_theme_dark_secondary = Color(0xFF83CFFF)
-val md_theme_dark_onSecondary = Color(0xFF00344B)
-val md_theme_dark_secondaryContainer = Color(0xFF004C6B)
-val md_theme_dark_onSecondaryContainer = Color(0xFFC6E7FF)
-val md_theme_dark_tertiary = Color(0xFFC4C0FF)
-val md_theme_dark_onTertiary = Color(0xFF2A2377)
-val md_theme_dark_tertiaryContainer = Color(0xFF413B8E)
-val md_theme_dark_onTertiaryContainer = Color(0xFFE3DFFF)
-val md_theme_dark_error = Color(0xFFFFB4AB)
-val md_theme_dark_onError = Color(0xFF690005)
-val md_theme_dark_errorContainer = Color(0xFF93000A)
-val md_theme_dark_onErrorContainer = Color(0xFFFFDAD6)
-val md_theme_dark_outline = Color(0xFF978E97)
-val md_theme_dark_background = Color(0xFF1E1B1E)
-val md_theme_dark_onBackground = Color(0xFFE8E0E5)
-val md_theme_dark_surface = Color(0xFF151216)
-val md_theme_dark_onSurface = Color(0xFFCBC5C9)
-val md_theme_dark_surfaceVariant = Color(0xFF4C444D)
-val md_theme_dark_onSurfaceVariant = Color(0xFFCEC3CD)
-val md_theme_dark_inverseSurface = Color(0xFFE8E0E5)
-val md_theme_dark_inverseOnSurface = Color(0xFF1E1B1E)
-val md_theme_dark_inversePrimary = Color(0xFF00658D)
-val md_theme_dark_surfaceTint = Color(0xFF82CFFF)
-val md_theme_dark_outlineVariant = Color(0xFF4C444D)
-val md_theme_dark_scrim = Color(0xFF000000)
+    val secondary: Color,
+    val secondaryVariant: Color,
 
+    val background: Color,
+    val surface: Color,
+    val menuItem: Color,
+    val error: Color,
 
-val seed = Color(0xFF296484)
+    val onBackground: Color,
+    val onBackgroundHighEmphasis: Color,
+    val onBackgroundMediumEmphasis: Color,
+    val onBackgroundDisable: Color,
+    val onError: Color,
+
+    val white: Color,
+    val whiteHighEmphasis: Color,
+    val whiteMediumEmphasis: Color,
+    val whiteDisable: Color,
+    val black: Color,
+    val blackHighEmphasis: Color,
+    val blackMediumEmphasis: Color,
+    val blackDisable: Color,
+
+    val transparent: Color
+)
+
+val DarkBlue = Color(0xFF2B2D42)
+val LightGray = Color(0xFFEDF2F4)
+val MiddleGray = Color(0xFFD1D1D6)
+val DarkGray = Color(0xFF8D99AE)
+val Red = Color(0xFFFE3333)
+

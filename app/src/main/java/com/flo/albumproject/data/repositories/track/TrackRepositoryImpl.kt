@@ -15,4 +15,6 @@ class TrackRepositoryImpl(
     override suspend fun getRemote(): NetworkResult = remoteDataSource.getAlbums()
 
     override suspend fun getLocal(): Flow<List<Track>> = localDataSource.getAll()
+
+    override suspend fun getLocalByAlbumId(albumId: Int) = localDataSource.getByAlbumId(albumId)
 }

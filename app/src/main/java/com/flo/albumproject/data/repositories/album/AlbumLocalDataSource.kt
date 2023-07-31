@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.map
 interface AlbumLocalDataSource {
     suspend fun getAll(): Flow<List<Album>>
     suspend fun save(album: Album)
+    suspend fun saveAll(albums: List<Album>)
 }
 
 class AlbumLocalDataSourceImpl(
@@ -28,4 +29,11 @@ class AlbumLocalDataSourceImpl(
         albumDao.insert(albumMapper.toAlbumEntity(album))
     }
 
+    override suspend fun saveAll(albums: List<Album>) {
+        albumDao.insertAll(
+            *albums.map { album ->
+                albumMapper.toAlbumEntity(album)
+            }.toTypedArray()
+        )
+    }
 }

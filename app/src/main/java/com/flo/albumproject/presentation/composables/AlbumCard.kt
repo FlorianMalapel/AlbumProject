@@ -10,25 +10,23 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.BlurredEdgeTreatment
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.flo.albumproject.domain.entities.Album
-import com.flo.albumproject.presentation.theme.NumberFont
-import com.flo.albumproject.presentation.theme.md_theme_dark_onSecondaryContainer
-import com.flo.albumproject.presentation.theme.md_theme_dark_secondaryContainer
+import com.flo.albumproject.presentation.theme.ProjectTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AlbumCard(modifier: Modifier, album: Album, onClick: () -> Unit) {
     Card(
         modifier = modifier,
-        colors = CardDefaults.cardColors(containerColor = md_theme_dark_secondaryContainer),
+        colors = CardDefaults.cardColors(containerColor = ProjectTheme.colors.secondary),
         shape = RoundedCornerShape(5.dp),
         onClick = onClick
     ) {
@@ -43,7 +41,7 @@ fun AlbumCard(modifier: Modifier, album: Album, onClick: () -> Unit) {
                         end.linkTo(parent.end)
                         bottom.linkTo(parent.bottom)
                     }.blur(radius = 90.dp, edgeTreatment = BlurredEdgeTreatment.Unbounded),
-                color = md_theme_dark_onSecondaryContainer,
+                color = ProjectTheme.colors.secondaryVariant,
                 shape = RoundedCornerShape(100)
             ) {}
             Text(
@@ -55,7 +53,7 @@ fun AlbumCard(modifier: Modifier, album: Album, onClick: () -> Unit) {
                 },
                 text = album.id.toString(),
                 fontSize = 45.sp,
-                fontFamily = NumberFont,
+                fontFamily = FontFamily.Cursive,
                 color = Color.White
             )
 

@@ -27,8 +27,8 @@ fun CatalogComponent(
 ) {
     val albums by liveAlbums.observeAsState()
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
-        val padding = 10.dp
-        val gridCellSize = (maxWidth / 3) - (padding * 3)
+        val padding = 15.dp
+        val gridCellSize = (maxWidth / 2) - (padding * 3)
         LazyVerticalGrid(
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(padding),
@@ -36,11 +36,11 @@ fun CatalogComponent(
             horizontalArrangement = Arrangement.spacedBy(padding),
             columns = GridCells.Adaptive(minSize = gridCellSize)
         ) {
-            items(count = albums?.size ?: 0) { index ->
+            items(count = albums?.size ?: 0, key = { index ->
+                albums!![index].id
+            }) { index ->
                 AlbumCard(
-                    modifier = Modifier
-                        .size(gridCellSize),
-//                    .animateItemPlacement(),
+                    modifier = Modifier.size(gridCellSize),
                     album = albums!![index]
                 ) {
                     callback.select(albums!![index])

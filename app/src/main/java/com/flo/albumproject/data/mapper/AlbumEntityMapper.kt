@@ -15,11 +15,7 @@ class AlbumEntityMapper {
 
     fun toAlbum(entity: AlbumEntity): Album {
         return Album(
-            id = entity.id,
-            tracks = null
-//            tracks = trackEntities.map {
-//                TrackEntityMapper().toTrack(it)
-//            }.toMutableList()
+            id = entity.id
         )
     }
 

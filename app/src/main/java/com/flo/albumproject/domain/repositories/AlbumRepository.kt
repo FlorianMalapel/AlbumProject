@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface AlbumRepository {
 
     suspend fun save(album: Album)
+    suspend fun saveAll(albums: List<Album>)
     suspend fun getLocal(): Flow<List<Album>>
 
 }

@@ -10,6 +10,8 @@ class AlbumRepositoryImpl(
 
     override suspend fun save(album: Album) = localDataSource.save(album)
 
+    override suspend fun saveAll(albums: List<Album>) = localDataSource.saveAll(albums)
+
     override suspend fun getLocal(): Flow<List<Album>> = localDataSource.getAll()
 
 }

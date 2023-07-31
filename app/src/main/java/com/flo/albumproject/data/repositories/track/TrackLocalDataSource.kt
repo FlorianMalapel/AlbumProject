@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.map
 
 interface TrackLocalDataSource {
     suspend fun getAll(): Flow<List<Track>>
-
     suspend fun saveAll(tracks: List<Track>)
+    suspend fun getByAlbumId(albumId: Int): Flow<List<Track>>
 }
 
 class TrackLocalDataSourceImpl(
@@ -31,5 +31,13 @@ class TrackLocalDataSourceImpl(
                 trackMapper.toTrackEntity(track)
             }.toTypedArray()
         )
+    }
+
+    override suspend fun getByAlbumId(albumId: Int): Flow<List<Track>> {
+        return trackDao.getAllWithAlbumId(albumId).map { trackEntities ->
+            trackEntities.map { entity ->
+                trackMapper.toTrack(entity = entity)
+            }
+        }
     }
 }

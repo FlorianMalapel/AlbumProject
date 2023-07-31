@@ -12,4 +12,6 @@ interface TrackRepository {
 
     suspend fun getLocal(): Flow<List<Track>>
 
+    suspend fun getLocalByAlbumId(albumId: Int): Flow<List<Track>>
+
 }
