@@ -44,6 +44,7 @@ class TrackViewModel(
                 if (albums.isNullOrEmpty()) {
                     liveLoadingState.postValue(LoadingState.NO_DATA)
                 } else {
+                    liveLoadingState.postValue(LoadingState.LOADED)
                     liveAlbums.postValue(albums)
                 }
              }

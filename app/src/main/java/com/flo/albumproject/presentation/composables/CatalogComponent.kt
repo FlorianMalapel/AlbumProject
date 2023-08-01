@@ -36,37 +36,55 @@ fun CatalogComponent(
     val albums by liveAlbums.observeAsState()
     val state by liveLoadingState.observeAsState()
 
-    if (state == LoadingState.NO_DATA) {
-        EmptyStateComponent {
-            callback.refresh()
+    when (state) {
+        LoadingState.NO_DATA -> {
+            EmptyStateComponent {
+                callback.refresh()
+            }
         }
-    } else if (state == LoadingState.LOADING) {
-        Box(modifier = Modifier.fillMaxSize()) {
-            ThemeLoader(Modifier.size(50.dp).align(Alignment.Center))
+        LoadingState.LOADING -> {
+            Box(modifier = Modifier.fillMaxSize()) {
+                ThemeLoader(Modifier.size(50.dp).align(Alignment.Center))
+            }
         }
-    } else {
-        BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
-            val padding = 15.dp
-            val gridCellSize = (maxWidth / 2) - (padding * 3)
-            LazyVerticalGrid(
-                modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(
-                    start = padding,
-                    end = padding,
-                    top = topBarPaddingValues.calculateTopPadding()
-                ),
-                verticalArrangement = Arrangement.spacedBy(padding),
-                horizontalArrangement = Arrangement.spacedBy(padding),
-                columns = GridCells.Adaptive(minSize = gridCellSize)
-            ) {
-                items(count = albums?.size ?: 0, key = { index ->
-                    albums!![index].id
-                }) { index ->
-                    AlbumCard(
-                        modifier = Modifier.size(gridCellSize),
-                        album = albums!![index]
-                    ) {
-                        callback.select(albums!![index])
+        else -> {
+            BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
+                val columnCount = when {
+                    maxWidth < 600.dp -> {
+                        2
+                    }
+                    maxWidth >= 600.dp && maxWidth < 840.dp -> {
+                        3
+                    }
+                    maxWidth >= 840.dp -> {
+                        4
+                    }
+                    else -> {
+                        2
+                    }
+                }
+                val padding = 15.dp
+                val gridCellSize = (maxWidth / columnCount) - (padding * (2 + columnCount - 1))
+                LazyVerticalGrid(
+                    modifier = Modifier.fillMaxSize(),
+                    contentPadding = PaddingValues(
+                        start = padding,
+                        end = padding,
+                        top = topBarPaddingValues.calculateTopPadding()
+                    ),
+                    verticalArrangement = Arrangement.spacedBy(padding),
+                    horizontalArrangement = Arrangement.spacedBy(padding),
+                    columns = GridCells.Adaptive(minSize = gridCellSize)
+                ) {
+                    items(count = albums?.size ?: 0, key = { index ->
+                        albums!![index].id
+                    }) { index ->
+                        AlbumCard(
+                            modifier = Modifier.size(gridCellSize),
+                            album = albums!![index]
+                        ) {
+                            callback.select(albums!![index])
+                        }
                     }
                 }
             }

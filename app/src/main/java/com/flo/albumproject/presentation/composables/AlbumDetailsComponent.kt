@@ -1,20 +1,32 @@
 package com.flo.albumproject.presentation.composables
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.BoxWithConstraintsScope
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -26,69 +38,153 @@ import com.flo.albumproject.R
 import com.flo.albumproject.presentation.theme.ProjectTheme
 import com.flo.albumproject.presentation.viewmodel.AlbumDetailsViewModel
 
-@Composable
-fun AlbumDetailsComponent(viewModel: AlbumDetailsViewModel) {
+interface AlbumDetailsComponentCallback {
+    fun leaveAlbumDetails()
+}
 
-    val album by viewModel.liveAlbum.observeAsState()
+@Composable
+fun AlbumDetailsComponent(viewModel: AlbumDetailsViewModel, callback: AlbumDetailsComponentCallback) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = ProjectTheme.colors.background
     ) {
-        ConstraintLayout(
+        BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
+            when {
+                maxWidth < maxHeight -> {
+                    AlbumDetailsComponentPortrait(viewModel = viewModel, callback = callback, scope = this)
+                }
+
+                else -> {
+                    AlbumDetailsComponentLandscape(viewModel = viewModel, callback = callback, scope = this)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun AlbumDetailsComponentPortrait(viewModel: AlbumDetailsViewModel, callback: AlbumDetailsComponentCallback, scope: BoxWithConstraintsScope) {
+    val album by viewModel.liveAlbum.observeAsState()
+    ConstraintLayout(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(10.dp)
+    ) {
+        val (albumCover, textAlbumTitle, trackList, backButton) = createRefs()
+        AlbumCard(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(10.dp)
+                .size(scope.maxWidth * 0.4f)
+                .constrainAs(albumCover) {
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                    top.linkTo(parent.top, 14.dp)
+                }, album = album!!
         ) {
-            val (albumCover, textAlbumTitle, trackList, backButton) = createRefs()
+            // Callback
+        }
+        IconButton(
+            modifier = Modifier
+                .wrapContentSize()
+                .clip(CircleShape)
+                .constrainAs(backButton) {
+                    start.linkTo(parent.start)
+                    top.linkTo(albumCover.top)
+                },
+            onClick = {
+                callback.leaveAlbumDetails()
+            }
+        ) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_back),
                 contentDescription = LocalContext.current.getString(R.string.back_button),
                 modifier = Modifier
-                    .size(50.dp).padding(10.dp)
-                    .constrainAs(backButton) {
-                        start.linkTo(parent.start)
-                        top.linkTo(albumCover.top)
-                    },
+                    .size(55.dp)
+                    .padding(10.dp),
                 tint = ProjectTheme.colors.onBackgroundHighEmphasis,
             )
-            AlbumCard(
-                modifier = Modifier
-                    .size(150.dp)
-                    .constrainAs(albumCover) {
-                        start.linkTo(parent.start)
-                        end.linkTo(parent.end)
-                        top.linkTo(parent.top, 14.dp)
-                    }, album = album!!
-            ) {
-                // Callback
+        }
+        Text(
+            modifier = Modifier
+                .wrapContentSize()
+                .constrainAs(textAlbumTitle) {
+                    start.linkTo(parent.start)
+                    top.linkTo(albumCover.bottom, 14.dp)
+                },
+            text = LocalContext.current.getString(R.string.title_album_number, album?.id),
+            color = ProjectTheme.colors.onBackgroundHighEmphasis,
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold,
+        )
+        LazyColumn(
+            modifier = Modifier.constrainAs(trackList) {
+                top.linkTo(textAlbumTitle.bottom, 14.dp)
+                start.linkTo(parent.start)
+                end.linkTo(parent.end)
+                bottom.linkTo(parent.bottom)
+                width = Dimension.fillToConstraints
+                height = Dimension.fillToConstraints
+            },
+            verticalArrangement = Arrangement.spacedBy(15.dp),
+        ) {
+            items(count = album?.tracks?.size ?: 0) { index ->
+                album?.tracks?.get(index)?.let { track ->
+                    TrackListItem(modifier = Modifier.fillMaxWidth(), track = track)
+                }
             }
-            Text(
+        }
+    }
+}
+
+@Composable
+private fun AlbumDetailsComponentLandscape(viewModel: AlbumDetailsViewModel, callback: AlbumDetailsComponentCallback, scope: BoxWithConstraintsScope) {
+    val album by viewModel.liveAlbum.observeAsState()
+    Row(modifier = Modifier.fillMaxSize()) {
+        Box(modifier = Modifier
+            .fillMaxWidth(0.4f)
+            .fillMaxHeight()) {
+            IconButton(
                 modifier = Modifier
                     .wrapContentSize()
-                    .constrainAs(textAlbumTitle) {
-                        start.linkTo(parent.start)
-                        top.linkTo(albumCover.bottom, 14.dp)
-                    },
-                text = LocalContext.current.getString(R.string.title_album_number, album?.id),
-                color = ProjectTheme.colors.onBackgroundHighEmphasis,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold,
-            )
-            LazyColumn(
-                modifier = Modifier.constrainAs(trackList) {
-                    top.linkTo(textAlbumTitle.bottom, 14.dp)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                    bottom.linkTo(parent.bottom)
-                    width = Dimension.fillToConstraints
-                    height = Dimension.fillToConstraints
-                },
-                verticalArrangement = Arrangement.spacedBy(15.dp),
+                    .clip(CircleShape)
+                    .align(Alignment.TopStart),
+                onClick = {
+                    callback.leaveAlbumDetails()
+                }
             ) {
-                items(count = album?.tracks?.size ?: 0) { index ->
-                    album?.tracks?.get(index)?.let { track ->
-                        TrackListItem(modifier = Modifier.fillMaxWidth(), track = track)
-                    }
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_back),
+                    contentDescription = LocalContext.current.getString(R.string.back_button),
+                    modifier = Modifier
+                        .size(65.dp)
+                        .padding(10.dp),
+                    tint = ProjectTheme.colors.onBackgroundHighEmphasis,
+                )
+            }
+
+            Column(modifier = Modifier.wrapContentSize().align(Alignment.Center)) {
+                AlbumCard(
+                    modifier = Modifier.size(scope.maxWidth * 0.30f).align(CenterHorizontally),
+                    album = album!!
+                ) {
+                    // Callback
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    modifier = Modifier.wrapContentSize().align(CenterHorizontally),
+                    text = LocalContext.current.getString(R.string.title_album_number, album?.id),
+                    color = ProjectTheme.colors.onBackgroundHighEmphasis,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold,
+                )
+            }
+        }
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(15.dp),
+        ) {
+            items(count = album?.tracks?.size ?: 0) { index ->
+                album?.tracks?.get(index)?.let { track ->
+                    TrackListItem(modifier = Modifier.fillMaxWidth(), track = track)
                 }
             }
         }

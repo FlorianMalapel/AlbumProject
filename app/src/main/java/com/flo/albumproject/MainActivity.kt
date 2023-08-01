@@ -29,12 +29,13 @@ import com.flo.albumproject.domain.entities.Album
 import com.flo.albumproject.presentation.composables.CatalogComponent
 import com.flo.albumproject.presentation.composables.CatalogComponentCallback
 import com.flo.albumproject.presentation.composables.AlbumDetailsComponent
+import com.flo.albumproject.presentation.composables.AlbumDetailsComponentCallback
 import com.flo.albumproject.presentation.theme.AlbumProjectTheme
 import com.flo.albumproject.presentation.theme.ProjectTheme
 import com.flo.albumproject.presentation.viewmodel.AlbumDetailsViewModel
 import com.flo.albumproject.presentation.viewmodel.TrackViewModel
 
-class MainActivity : ComponentActivity(), CatalogComponentCallback {
+class MainActivity : ComponentActivity(), CatalogComponentCallback, AlbumDetailsComponentCallback {
 
     private val trackViewModel: TrackViewModel by viewModels {
         TrackViewModel.TrackViewModelFactory(
@@ -97,7 +98,7 @@ class MainActivity : ComponentActivity(), CatalogComponentCallback {
                         )
                     }
                     composable("album_detail") {
-                        AlbumDetailsComponent(viewModel = albumDetailsViewModel)
+                        AlbumDetailsComponent(viewModel = albumDetailsViewModel, callback = this@MainActivity)
                     }
                 }
             }
@@ -119,5 +120,12 @@ class MainActivity : ComponentActivity(), CatalogComponentCallback {
 
     override fun refresh() {
         trackViewModel.load()
+    }
+
+    /**
+     * AlbumDetailsComponentCallback
+     */
+    override fun leaveAlbumDetails() {
+        navController.popBackStack()
     }
 }
