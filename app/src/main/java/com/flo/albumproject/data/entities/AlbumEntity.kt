@@ -11,7 +11,7 @@ data class AlbumEntity(
     @ColumnInfo(name = "id")
     val id: Int,
 
-//    @ColumnInfo(name = "track_ids")
-//    val trackIDs: List<String>
+    @ColumnInfo(name = "color")
+    val color: Int
 
 )

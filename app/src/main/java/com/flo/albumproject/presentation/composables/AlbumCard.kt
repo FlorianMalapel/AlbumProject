@@ -26,7 +26,7 @@ import com.flo.albumproject.presentation.theme.ProjectTheme
 fun AlbumCard(modifier: Modifier, album: Album, onClick: () -> Unit) {
     Card(
         modifier = modifier,
-        colors = CardDefaults.cardColors(containerColor = ProjectTheme.colors.secondary),
+        colors = CardDefaults.cardColors(containerColor = Color(album.color)),
         shape = RoundedCornerShape(5.dp),
         onClick = onClick
     ) {
@@ -41,7 +41,7 @@ fun AlbumCard(modifier: Modifier, album: Album, onClick: () -> Unit) {
                         end.linkTo(parent.end)
                         bottom.linkTo(parent.bottom)
                     }.blur(radius = 90.dp, edgeTreatment = BlurredEdgeTreatment.Unbounded),
-                color = ProjectTheme.colors.secondaryVariant,
+                color = ProjectTheme.colors.primaryVariant,
                 shape = RoundedCornerShape(100)
             ) {}
             Text(

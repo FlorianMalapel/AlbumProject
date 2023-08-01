@@ -89,25 +89,6 @@ private val darkProjectColors = with(commonAlignColors) {
     )
 }
 
-//@Composable
-//fun ProjectTheme(
-//    isDarkTheme: Boolean = isSystemInDarkTheme(),
-//    content: @Composable () -> Unit
-//) {
-//    val systemUiController = rememberSystemUiController()
-//    systemUiController.setSystemBarsColor(
-//        color = if (isDarkTheme) darkAlignColors.primary else lightAlignColors.primary,
-//        darkIcons = false
-//    )
-//
-//
-//    CompositionLocalProvider(
-//        LocalProjectColors provides if (isDarkTheme) darkProjectColors else lightProjectColors,
-//        content = content
-//    )
-//}
-
-
 @Composable
 fun AlbumProjectTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -128,6 +109,7 @@ fun AlbumProjectTheme(
         SideEffect {
             val window = (view.context as Activity).window
             window.statusBarColor = colorScheme.primary.toArgb()
+            window.navigationBarColor = colorScheme.primary.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
         }
     }
@@ -137,33 +119,3 @@ fun AlbumProjectTheme(
         content = content
     )
 }
-
-//@Composable
-//fun ProjectTheme(
-//    darkTheme: Boolean = isSystemInDarkTheme(),
-//    // Dynamic color is available on Android 12+
-//    dynamicColor: Boolean = true,
-//    content: @Composable() () -> Unit
-//) {
-//    val view = LocalView.current
-//    val navColor = ProjectTheme.colors.primary
-//    if (!view.isInEditMode) {
-//        SideEffect {
-//            val window = (view.context as Activity).window
-//            window.statusBarColor = navColor.toArgb()
-//            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
-//        }
-//    }
-//    CompositionLocalProvider(
-//        LocalProjectColors provides when {
-//            dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-//                val context = LocalContext.current
-//                if (darkTheme) darkProjectColors else lightProjectColors
-//            }
-//
-//            darkTheme -> darkProjectColors
-//            else -> lightProjectColors
-//        },
-//        content = content
-//    )
-//}

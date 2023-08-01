@@ -35,29 +35,20 @@ class TrackViewModel(
             val result = trackUseCase.getRemote()
             if (result is NetworkResult.Success) {
                 result.tracks?.let { tracks ->
-//                    liveAlbums.postValue(buildAlbumList(tracks))
+                    liveLoadingState.postValue(LoadingState.LOADED)
                     liveAlbums.postValue(albumUseCase.getLocal().firstOrNull())
                     return@launch
                 }
             }
-            liveAlbums.postValue(albumUseCase.getLocal().firstOrNull())
-//            liveAlbums.postValue(buildAlbumList(trackUseCase.getLocal().first()))
+            albumUseCase.getLocal().firstOrNull().let { albums ->
+                if (albums.isNullOrEmpty()) {
+                    liveLoadingState.postValue(LoadingState.NO_DATA)
+                } else {
+                    liveAlbums.postValue(albums)
+                }
+             }
         }
     }
-
-//    private fun buildAlbumList(tracks: List<Track>): List<Album> {
-//        val albums = mutableListOf<Album>()
-//        for (track in tracks) {
-//            if (!albums.any { it.id == track.albumId }) {
-//                albums.add(Album(track.albumId, mutableListOf(track)))
-//                continue
-//            }
-//            val albumIndex = albums.indexOfFirst { it.id == track.albumId }
-//            albums[albumIndex].tracks?.add(track)
-//        }
-//        return albums
-//    }
-
 
     class TrackViewModelFactory(
         private val trackUseCase: TrackUseCase,

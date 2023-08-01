@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,6 +16,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -37,13 +39,25 @@ fun AlbumDetailsComponent(viewModel: AlbumDetailsViewModel) {
                 .fillMaxSize()
                 .padding(10.dp)
         ) {
-            val (albumCover, textAlbumTitle, trackList) = createRefs()
+            val (albumCover, textAlbumTitle, trackList, backButton) = createRefs()
+            Icon(
+                painter = painterResource(id = R.drawable.ic_back),
+                contentDescription = LocalContext.current.getString(R.string.back_button),
+                modifier = Modifier
+                    .size(50.dp).padding(10.dp)
+                    .constrainAs(backButton) {
+                        start.linkTo(parent.start)
+                        top.linkTo(albumCover.top)
+                    },
+                tint = ProjectTheme.colors.onBackgroundHighEmphasis,
+            )
             AlbumCard(
                 modifier = Modifier
+                    .size(150.dp)
                     .constrainAs(albumCover) {
                         start.linkTo(parent.start)
                         end.linkTo(parent.end)
-                        top.linkTo(parent.top)
+                        top.linkTo(parent.top, 14.dp)
                     }, album = album!!
             ) {
                 // Callback

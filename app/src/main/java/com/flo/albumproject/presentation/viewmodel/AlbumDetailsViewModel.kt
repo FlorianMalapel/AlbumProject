@@ -28,7 +28,7 @@ class AlbumDetailsViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             trackUseCase.getLocalTracksByAlbumId(album.id).firstOrNull()?.let { tracks ->
                 liveAlbum.postValue(
-                    Album(album.id, tracks.toMutableList())
+                    Album(album.id, album.color, tracks.toMutableList())
                 )
             }
         }

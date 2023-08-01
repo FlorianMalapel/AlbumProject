@@ -3,4 +3,7 @@
     <string name="title_albums">Albums</string>
     <string name="title_album_number">Album #%d</string>
     <string name="subtitle_track_number">Track #%d</string>
+    <string name="offline_issue">Il y a eu une erreur dans le chargement des données.</string>
+    <string name="offline_retry">Ré-essayer</string>
+    <string name="back_button">Retour</string>
 </resources>

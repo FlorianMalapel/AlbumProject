@@ -5,12 +5,14 @@ import com.flo.albumproject.domain.entities.Album
 import com.flo.albumproject.domain.entities.Track
 import com.flo.albumproject.domain.repositories.AlbumRepository
 import com.flo.albumproject.domain.repositories.TrackRepository
+import com.flo.albumproject.utils.extension.generateColor
 import kotlinx.coroutines.flow.Flow
+import kotlin.random.Random
 
 class TrackUseCase(
     private val trackRepository: TrackRepository,
     private val albumRepository: AlbumRepository,
-    ) {
+) {
 
     suspend fun getRemote(): NetworkResult {
         return try {
@@ -19,7 +21,12 @@ class TrackUseCase(
                 result.tracks?.let { tracks ->
                     trackRepository.save(tracks)
                     tracks.groupBy { it.albumId }.let { grouped ->
-                        albumRepository.saveAll(grouped.map { Album(it.key) })
+                        albumRepository.saveAll(grouped.map {
+                            Album(
+                                id = it.key,
+                                color = Random.generateColor()
+                            )
+                        })
                     }
                 }
             }

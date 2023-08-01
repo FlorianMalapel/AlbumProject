@@ -9,13 +9,14 @@ class AlbumEntityMapper {
     fun toAlbumEntity(album: Album): AlbumEntity {
         return AlbumEntity(
             id = album.id,
-//            trackIDs = album.tracks.map { it.id.toString() }
+            color = album.color
         )
     }
 
     fun toAlbum(entity: AlbumEntity): Album {
         return Album(
-            id = entity.id
+            id = entity.id,
+            color = entity.color
         )
     }
 

@@ -14,9 +14,12 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.BlurredEdgeTreatment
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -80,12 +83,14 @@ class MainActivity : ComponentActivity(), CatalogComponentCallback {
                             },
                             content = {
                                 Surface(
-                                    modifier = Modifier.fillMaxSize().padding(it),
+                                    modifier = Modifier.fillMaxSize(),
                                     color = ProjectTheme.colors.background
                                 ) {
                                     CatalogComponent(
                                         liveAlbums = trackViewModel.liveAlbums,
-                                        callback = this@MainActivity
+                                        liveLoadingState = trackViewModel.liveLoadingState,
+                                        callback = this@MainActivity,
+                                        topBarPaddingValues = it
                                     )
                                 }
                             }
@@ -110,5 +115,9 @@ class MainActivity : ComponentActivity(), CatalogComponentCallback {
     override fun select(album: Album) {
         albumDetailsViewModel.setAlbum(album)
         navController.navigate("album_detail")
+    }
+
+    override fun refresh() {
+        trackViewModel.load()
     }
 }
