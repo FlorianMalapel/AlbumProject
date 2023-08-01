@@ -26,7 +26,7 @@ import com.flo.albumproject.domain.entities.Track
 import com.flo.albumproject.presentation.theme.ProjectTheme
 
 @Composable
-fun TrackListItem(modifier: Modifier, track: Track) {
+fun TrackListItem(modifier: Modifier, track: Track, position: Int) {
     ConstraintLayout(modifier = modifier) {
         val (image, texts) = createRefs()
         AsyncImage(
@@ -69,7 +69,7 @@ fun TrackListItem(modifier: Modifier, track: Track) {
             Spacer(modifier = Modifier.height(5.dp))
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = LocalContext.current.getString(R.string.subtitle_track_number, track.id),
+                text = LocalContext.current.getString(R.string.subtitle_track_number, position + 1),
                 color = ProjectTheme.colors.onBackgroundDisable,
                 fontWeight = FontWeight.Light,
                 fontSize = 12.sp

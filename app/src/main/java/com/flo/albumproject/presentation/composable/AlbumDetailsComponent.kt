@@ -44,7 +44,10 @@ interface AlbumDetailsComponentCallback {
 }
 
 @Composable
-fun AlbumDetailsComponent(viewModel: AlbumDetailsViewModel, callback: AlbumDetailsComponentCallback) {
+fun AlbumDetailsComponent(
+    viewModel: AlbumDetailsViewModel,
+    callback: AlbumDetailsComponentCallback
+) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = ProjectTheme.colors.background
@@ -52,11 +55,19 @@ fun AlbumDetailsComponent(viewModel: AlbumDetailsViewModel, callback: AlbumDetai
         BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
             when {
                 maxWidth < maxHeight -> {
-                    AlbumDetailsComponentPortrait(viewModel = viewModel, callback = callback, scope = this)
+                    AlbumDetailsComponentPortrait(
+                        viewModel = viewModel,
+                        callback = callback,
+                        scope = this
+                    )
                 }
 
                 else -> {
-                    AlbumDetailsComponentLandscape(viewModel = viewModel, callback = callback, scope = this)
+                    AlbumDetailsComponentLandscape(
+                        viewModel = viewModel,
+                        callback = callback,
+                        scope = this
+                    )
                 }
             }
         }
@@ -64,7 +75,11 @@ fun AlbumDetailsComponent(viewModel: AlbumDetailsViewModel, callback: AlbumDetai
 }
 
 @Composable
-private fun AlbumDetailsComponentPortrait(viewModel: AlbumDetailsViewModel, callback: AlbumDetailsComponentCallback, scope: BoxWithConstraintsScope) {
+private fun AlbumDetailsComponentPortrait(
+    viewModel: AlbumDetailsViewModel,
+    callback: AlbumDetailsComponentCallback,
+    scope: BoxWithConstraintsScope
+) {
     val album by viewModel.liveAlbum.observeAsState()
     ConstraintLayout(
         modifier = Modifier
@@ -131,7 +146,13 @@ private fun AlbumDetailsComponentPortrait(viewModel: AlbumDetailsViewModel, call
         ) {
             items(count = album?.tracks?.size ?: 0) { index ->
                 album?.tracks?.get(index)?.let { track ->
-                    TrackListItem(modifier = Modifier.fillMaxWidth().testTag("track_list_item_$index"), track = track)
+                    TrackListItem(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .testTag("track_list_item_$index"),
+                        track = track,
+                        position = index
+                    )
                 }
             }
         }
@@ -139,12 +160,18 @@ private fun AlbumDetailsComponentPortrait(viewModel: AlbumDetailsViewModel, call
 }
 
 @Composable
-private fun AlbumDetailsComponentLandscape(viewModel: AlbumDetailsViewModel, callback: AlbumDetailsComponentCallback, scope: BoxWithConstraintsScope) {
+private fun AlbumDetailsComponentLandscape(
+    viewModel: AlbumDetailsViewModel,
+    callback: AlbumDetailsComponentCallback,
+    scope: BoxWithConstraintsScope
+) {
     val album by viewModel.liveAlbum.observeAsState()
     Row(modifier = Modifier.fillMaxSize()) {
-        Box(modifier = Modifier
-            .fillMaxWidth(0.4f)
-            .fillMaxHeight()) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth(0.4f)
+                .fillMaxHeight()
+        ) {
             IconButton(
                 modifier = Modifier
                     .wrapContentSize()
@@ -165,16 +192,23 @@ private fun AlbumDetailsComponentLandscape(viewModel: AlbumDetailsViewModel, cal
                 )
             }
 
-            Column(modifier = Modifier.wrapContentSize().align(Alignment.Center)) {
+            Column(modifier = Modifier
+                .wrapContentSize()
+                .align(Alignment.Center)) {
                 AlbumCard(
-                    modifier = Modifier.size(scope.maxWidth * 0.30f).align(CenterHorizontally).testTag("album_details_cover"),
+                    modifier = Modifier
+                        .size(scope.maxWidth * 0.30f)
+                        .align(CenterHorizontally)
+                        .testTag("album_details_cover"),
                     album = album!!
                 ) {
                     // Callback
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    modifier = Modifier.wrapContentSize().align(CenterHorizontally),
+                    modifier = Modifier
+                        .wrapContentSize()
+                        .align(CenterHorizontally),
                     text = LocalContext.current.getString(R.string.title_album_number, album?.id),
                     color = ProjectTheme.colors.onBackgroundHighEmphasis,
                     fontSize = 18.sp,
@@ -188,7 +222,13 @@ private fun AlbumDetailsComponentLandscape(viewModel: AlbumDetailsViewModel, cal
         ) {
             items(count = album?.tracks?.size ?: 0) { index ->
                 album?.tracks?.get(index)?.let { track ->
-                    TrackListItem(modifier = Modifier.fillMaxWidth().testTag("track_list_item_$index"), track = track)
+                    TrackListItem(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .testTag("track_list_item_$index"),
+                        track = track,
+                        position = index
+                    )
                 }
             }
         }
