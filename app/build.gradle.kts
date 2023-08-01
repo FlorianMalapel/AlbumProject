@@ -1,5 +1,3 @@
-import com.android.tools.build.bundletool.commands.BuildApksModule.ApkSigningConfig
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -9,6 +7,11 @@ plugins {
 android {
     namespace = "com.flo.albumproject"
     compileSdk = 33
+
+    sourceSets {
+        getByName("androidTest").assets.srcDirs("src/androidTest/resources")
+        getByName("androidTest").assets.srcDirs("src/androidTest/java")
+    }
 
     defaultConfig {
         applicationId = "com.flo.albumproject"
@@ -108,4 +111,7 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+    androidTestImplementation("com.squareup.okhttp3:mockwebserver:4.1.0")
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.1.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
 }

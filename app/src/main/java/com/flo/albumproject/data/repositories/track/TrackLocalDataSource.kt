@@ -6,7 +6,7 @@ import com.flo.albumproject.domain.entities.Track
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-interface TrackLocalDataSource {
+interface  TrackLocalDataSource {
     suspend fun getAll(): Flow<List<Track>>
     suspend fun saveAll(tracks: List<Track>)
     suspend fun getByAlbumId(albumId: Int): Flow<List<Track>>
