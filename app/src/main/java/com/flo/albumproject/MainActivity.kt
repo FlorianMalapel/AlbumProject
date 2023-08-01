@@ -37,6 +37,7 @@ import com.flo.albumproject.presentation.composable.CatalogComponentCallback
 import com.flo.albumproject.presentation.composable.AlbumDetailsComponent
 import com.flo.albumproject.presentation.composable.AlbumDetailsComponentCallback
 import com.flo.albumproject.presentation.composable.common.OfflineCard
+import com.flo.albumproject.presentation.screen.MainScreen
 import com.flo.albumproject.presentation.theme.AlbumProjectTheme
 import com.flo.albumproject.presentation.theme.ProjectTheme
 import com.flo.albumproject.presentation.viewmodel.AlbumDetailsViewModel
@@ -69,67 +70,14 @@ class MainActivity : ComponentActivity(), CatalogComponentCallback, AlbumDetails
         super.onCreate(savedInstanceState)
         setContent {
             navController = rememberNavController()
-            val networkStatus by liveNetworkState.observeAsState()
-            AlbumProjectTheme {
-                ConstraintLayout(modifier = Modifier.fillMaxSize()) {
-                    NavHost(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(ProjectTheme.colors.background),
-                        navController = navController, startDestination = "albums"
-                    ) {
-                        composable("albums") {
-                            Scaffold(
-                                modifier = Modifier.fillMaxSize(),
-                                topBar = {
-                                    CenterAlignedTopAppBar(
-                                        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                                            containerColor = ProjectTheme.colors.background
-                                        ),
-                                        title = {
-                                            Text(
-                                                LocalContext.current.getString(R.string.title_albums),
-                                                maxLines = 1,
-                                                overflow = TextOverflow.Ellipsis,
-                                                fontWeight = FontWeight.Bold,
-                                                fontSize = 20.sp,
-                                                color = ProjectTheme.colors.onBackground
-                                            )
-                                        })
-                                },
-                                content = {
-                                    Surface(
-                                        modifier = Modifier.fillMaxSize(),
-                                        color = ProjectTheme.colors.background
-                                    ) {
-                                        CatalogComponent(
-                                            liveAlbums = trackViewModel.liveAlbums,
-                                            liveLoadingState = trackViewModel.liveLoadingState,
-                                            callback = this@MainActivity,
-                                            topBarPaddingValues = it
-                                        )
-                                    }
-                                }
-                            )
-                        }
-                        composable("album_detail") {
-                            AlbumDetailsComponent(
-                                viewModel = albumDetailsViewModel,
-                                callback = this@MainActivity
-                            )
-                        }
-                    }
-                    AnimatedVisibility(
-                        visible = networkStatus == NetworkStatus.Offline,
-                        modifier = Modifier.alpha(0.95f).constrainAs(createRef()) {
-                            end.linkTo(parent.end, 8.dp)
-                            top.linkTo(parent.top, 8.dp)
-                        }
-                    ) {
-                        OfflineCard(modifier = Modifier)
-                    }
-                }
-            }
+            MainScreen(
+                navController = navController,
+                liveNetworkState = liveNetworkState,
+                trackViewModel = trackViewModel,
+                albumDetailsViewModel = albumDetailsViewModel,
+                albumDetailsCallback = this@MainActivity,
+                catalogComponentCallback = this@MainActivity
+            )
         }
     }
 

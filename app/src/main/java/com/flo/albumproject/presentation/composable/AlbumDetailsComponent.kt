@@ -28,6 +28,7 @@ import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -74,6 +75,7 @@ private fun AlbumDetailsComponentPortrait(viewModel: AlbumDetailsViewModel, call
         AlbumCard(
             modifier = Modifier
                 .size(scope.maxWidth * 0.4f)
+                .testTag("album_details_cover")
                 .constrainAs(albumCover) {
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
@@ -86,6 +88,7 @@ private fun AlbumDetailsComponentPortrait(viewModel: AlbumDetailsViewModel, call
             modifier = Modifier
                 .wrapContentSize()
                 .clip(CircleShape)
+                .testTag("back_button")
                 .constrainAs(backButton) {
                     start.linkTo(parent.start)
                     top.linkTo(albumCover.top)
@@ -128,7 +131,7 @@ private fun AlbumDetailsComponentPortrait(viewModel: AlbumDetailsViewModel, call
         ) {
             items(count = album?.tracks?.size ?: 0) { index ->
                 album?.tracks?.get(index)?.let { track ->
-                    TrackListItem(modifier = Modifier.fillMaxWidth(), track = track)
+                    TrackListItem(modifier = Modifier.fillMaxWidth().testTag("track_list_item_$index"), track = track)
                 }
             }
         }
@@ -146,7 +149,8 @@ private fun AlbumDetailsComponentLandscape(viewModel: AlbumDetailsViewModel, cal
                 modifier = Modifier
                     .wrapContentSize()
                     .clip(CircleShape)
-                    .align(Alignment.TopStart),
+                    .align(Alignment.TopStart)
+                    .testTag("back_button"),
                 onClick = {
                     callback.leaveAlbumDetails()
                 }
@@ -163,7 +167,7 @@ private fun AlbumDetailsComponentLandscape(viewModel: AlbumDetailsViewModel, cal
 
             Column(modifier = Modifier.wrapContentSize().align(Alignment.Center)) {
                 AlbumCard(
-                    modifier = Modifier.size(scope.maxWidth * 0.30f).align(CenterHorizontally),
+                    modifier = Modifier.size(scope.maxWidth * 0.30f).align(CenterHorizontally).testTag("album_details_cover"),
                     album = album!!
                 ) {
                     // Callback
@@ -184,7 +188,7 @@ private fun AlbumDetailsComponentLandscape(viewModel: AlbumDetailsViewModel, cal
         ) {
             items(count = album?.tracks?.size ?: 0) { index ->
                 album?.tracks?.get(index)?.let { track ->
-                    TrackListItem(modifier = Modifier.fillMaxWidth(), track = track)
+                    TrackListItem(modifier = Modifier.fillMaxWidth().testTag("track_list_item_$index"), track = track)
                 }
             }
         }

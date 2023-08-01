@@ -13,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.MutableLiveData
 import com.flo.albumproject.domain.entities.Album
@@ -65,7 +66,7 @@ fun CatalogComponent(
                 val padding = 15.dp
                 val gridCellSize = (maxWidth / columnCount) - (padding * (2 + columnCount - 1))
                 LazyVerticalGrid(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier.fillMaxSize().testTag("grid_catalog"),
                     contentPadding = PaddingValues(
                         start = padding,
                         end = padding,
@@ -79,7 +80,7 @@ fun CatalogComponent(
                         albums!![index].id
                     }) { index ->
                         AlbumCard(
-                            modifier = Modifier.size(gridCellSize),
+                            modifier = Modifier.size(gridCellSize).testTag("grid_catalog_item_$index"),
                             album = albums!![index]
                         ) {
                             callback.select(albums!![index])
