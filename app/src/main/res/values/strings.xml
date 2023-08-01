@@ -5,5 +5,6 @@
     <string name="subtitle_track_number">Track #%d</string>
     <string name="offline_issue">Il y a eu une erreur dans le chargement des données.</string>
     <string name="offline_retry">Ré-essayer</string>
+    <string name="offline_card">Hors-ligne</string>
     <string name="back_button">Retour</string>
 </resources>

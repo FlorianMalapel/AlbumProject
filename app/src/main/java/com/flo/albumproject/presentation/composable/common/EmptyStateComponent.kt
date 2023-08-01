@@ -1,6 +1,5 @@
-package com.flo.albumproject.presentation.composables
+package com.flo.albumproject.presentation.composable.common
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -28,7 +27,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.flo.albumproject.R
 import com.flo.albumproject.presentation.theme.ProjectTheme
-import kotlinx.coroutines.delay
 
 @Composable
 fun EmptyStateComponent(onClick: () -> Unit) {
@@ -60,7 +58,7 @@ fun EmptyStateComponent(onClick: () -> Unit) {
                 )
 
             }
-            Spacer(modifier = Modifier.height(75.dp))
+            Spacer(modifier = Modifier.height(25.dp))
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 text = LocalContext.current.getString(R.string.offline_issue),

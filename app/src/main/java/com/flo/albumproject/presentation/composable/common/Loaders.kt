@@ -1,12 +1,10 @@
-package com.flo.albumproject.presentation.composables
+package com.flo.albumproject.presentation.composable.common
 
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.flo.albumproject.presentation.theme.ProjectTheme
 

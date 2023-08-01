@@ -1,4 +1,4 @@
-package com.flo.albumproject.presentation.composables
+package com.flo.albumproject.presentation.composable
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
