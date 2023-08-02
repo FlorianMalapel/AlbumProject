@@ -25,8 +25,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.flo.albumproject.R
-import com.flo.albumproject.presentation.composable.AlbumDetailsComponent
-import com.flo.albumproject.presentation.composable.AlbumDetailsComponentCallback
 import com.flo.albumproject.presentation.composable.CatalogComponent
 import com.flo.albumproject.presentation.composable.CatalogComponentCallback
 import com.flo.albumproject.presentation.composable.common.OfflineCard

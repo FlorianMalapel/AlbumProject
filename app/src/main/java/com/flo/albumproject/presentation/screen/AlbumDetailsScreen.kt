@@ -1,5 +1,6 @@
-package com.flo.albumproject.presentation.composable
+package com.flo.albumproject.presentation.screen
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -36,6 +37,8 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.flo.albumproject.R
+import com.flo.albumproject.presentation.composable.AlbumCard
+import com.flo.albumproject.presentation.composable.TrackListItem
 import com.flo.albumproject.presentation.theme.ProjectTheme
 import com.flo.albumproject.presentation.viewmodel.AlbumDetailsViewModel
 
@@ -87,18 +90,25 @@ private fun AlbumDetailsComponentPortrait(
             .padding(10.dp)
     ) {
         val (albumCover, textAlbumTitle, trackList, backButton) = createRefs()
-        AlbumCard(
+        AnimatedVisibility(
             modifier = Modifier
                 .size(scope.maxWidth * 0.4f)
-                .testTag("album_details_cover")
                 .constrainAs(albumCover) {
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                     top.linkTo(parent.top, 14.dp)
-                }, album = album!!
+                },
+            visible = album != null
         ) {
-            // Callback
+            AlbumCard(
+                modifier = Modifier
+                    .size(scope.maxWidth * 0.4f)
+                    .testTag("album_details_cover"), album = album!!
+            ) {
+                // Callback
+            }
         }
+
         IconButton(
             modifier = Modifier
                 .wrapContentSize()
@@ -168,9 +178,7 @@ private fun AlbumDetailsComponentLandscape(
     val album by viewModel.liveAlbum.observeAsState()
     Row(modifier = Modifier.fillMaxSize()) {
         Box(
-            modifier = Modifier
-                .fillMaxWidth(0.4f)
-                .fillMaxHeight()
+            modifier = Modifier.fillMaxWidth(0.4f).fillMaxHeight()
         ) {
             IconButton(
                 modifier = Modifier
@@ -185,37 +193,47 @@ private fun AlbumDetailsComponentLandscape(
                 Icon(
                     painter = painterResource(id = R.drawable.ic_back),
                     contentDescription = LocalContext.current.getString(R.string.back_button),
-                    modifier = Modifier
-                        .size(65.dp)
-                        .padding(10.dp),
+                    modifier = Modifier.size(65.dp).padding(10.dp),
                     tint = ProjectTheme.colors.onBackgroundHighEmphasis,
                 )
             }
 
-            Column(modifier = Modifier
-                .wrapContentSize()
-                .align(Alignment.Center)) {
-                AlbumCard(
-                    modifier = Modifier
-                        .size(scope.maxWidth * 0.30f)
-                        .align(CenterHorizontally)
-                        .testTag("album_details_cover"),
-                    album = album!!
-                ) {
-                    // Callback
-                }
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(
+
+            this@Row.AnimatedVisibility(
+                modifier = Modifier.size(scope.maxWidth * 0.30f).align(Alignment.Center),
+                visible = album != null
+            ) {
+                Column(
                     modifier = Modifier
                         .wrapContentSize()
-                        .align(CenterHorizontally),
-                    text = LocalContext.current.getString(R.string.title_album_number, album?.id),
-                    color = ProjectTheme.colors.onBackgroundHighEmphasis,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                )
+                        .align(Alignment.Center)
+                ) {
+                    AlbumCard(
+                        modifier = Modifier
+                            .size(scope.maxWidth * 0.30f)
+                            .align(CenterHorizontally)
+                            .testTag("album_details_cover"),
+                        album = album!!
+                    ) {
+                        // Callback
+                    }
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(
+                        modifier = Modifier
+                            .wrapContentSize()
+                            .align(CenterHorizontally),
+                        text = LocalContext.current.getString(
+                            R.string.title_album_number,
+                            album?.id
+                        ),
+                        color = ProjectTheme.colors.onBackgroundHighEmphasis,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold,
+                    )
+                }
             }
         }
+
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(15.dp),

@@ -14,7 +14,6 @@ import kotlinx.coroutines.launch
 
 class AlbumDetailsViewModel(
     val trackUseCase: TrackUseCase,
-    val albumUseCase: AlbumUseCase,
 ): ViewModel() {
 
     val liveAlbum: MutableLiveData<Album> = MutableLiveData()
@@ -39,14 +38,12 @@ class AlbumDetailsViewModel(
 
     class AlbumDetailsViewModelFactory(
         private val trackUseCase: TrackUseCase,
-        private val albumUseCase: AlbumUseCase
     ) : ViewModelProvider.NewInstanceFactory() {
 
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
             return AlbumDetailsViewModel(
                 trackUseCase = trackUseCase,
-                albumUseCase = albumUseCase
             ) as T
         }
 

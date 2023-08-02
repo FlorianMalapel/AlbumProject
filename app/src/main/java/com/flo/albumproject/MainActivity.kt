@@ -5,41 +5,14 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.flo.albumproject.domain.entities.Album
-import com.flo.albumproject.presentation.composable.CatalogComponent
 import com.flo.albumproject.presentation.composable.CatalogComponentCallback
-import com.flo.albumproject.presentation.composable.AlbumDetailsComponent
-import com.flo.albumproject.presentation.composable.AlbumDetailsComponentCallback
-import com.flo.albumproject.presentation.composable.common.OfflineCard
+import com.flo.albumproject.presentation.screen.AlbumDetailsComponentCallback
 import com.flo.albumproject.presentation.screen.MainScreen
-import com.flo.albumproject.presentation.theme.AlbumProjectTheme
-import com.flo.albumproject.presentation.theme.ProjectTheme
 import com.flo.albumproject.presentation.viewmodel.AlbumDetailsViewModel
 import com.flo.albumproject.presentation.viewmodel.TrackViewModel
 import com.flo.albumproject.utils.network.NetworkStatus
@@ -57,7 +30,6 @@ class MainActivity : ComponentActivity(), CatalogComponentCallback, AlbumDetails
     private val albumDetailsViewModel: AlbumDetailsViewModel by viewModels {
         AlbumDetailsViewModel.AlbumDetailsViewModelFactory(
             (application as AppDelegate).trackUseCase,
-            (application as AppDelegate).albumUseCase,
         )
     }
 
