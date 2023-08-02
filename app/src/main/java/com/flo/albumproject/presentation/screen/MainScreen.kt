@@ -34,6 +34,10 @@ import com.flo.albumproject.presentation.viewmodel.AlbumDetailsViewModel
 import com.flo.albumproject.presentation.viewmodel.TrackViewModel
 import com.flo.albumproject.utils.network.NetworkStatus
 
+enum class NavigationScreen(val route: String) {
+    Albums("albums"), AlbumDetails("album_details")
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
@@ -51,9 +55,9 @@ fun MainScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(ProjectTheme.colors.background),
-                navController = navController, startDestination = "albums"
+                navController = navController, startDestination = NavigationScreen.Albums.route
             ) {
-                composable("albums") {
+                composable(NavigationScreen.Albums.route) {
                     Scaffold(
                         modifier = Modifier.fillMaxSize(),
                         topBar = {
@@ -87,7 +91,7 @@ fun MainScreen(
                         }
                     )
                 }
-                composable("album_detail") {
+                composable(NavigationScreen.AlbumDetails.route) {
                     AlbumDetailsComponent(
                         viewModel = albumDetailsViewModel,
                         callback = albumDetailsCallback

@@ -13,6 +13,7 @@ import com.flo.albumproject.domain.entities.Album
 import com.flo.albumproject.presentation.composable.CatalogComponentCallback
 import com.flo.albumproject.presentation.screen.AlbumDetailsComponentCallback
 import com.flo.albumproject.presentation.screen.MainScreen
+import com.flo.albumproject.presentation.screen.NavigationScreen
 import com.flo.albumproject.presentation.viewmodel.AlbumDetailsViewModel
 import com.flo.albumproject.presentation.viewmodel.TrackViewModel
 import com.flo.albumproject.utils.network.NetworkStatus
@@ -37,7 +38,6 @@ class MainActivity : ComponentActivity(), CatalogComponentCallback, AlbumDetails
     private val liveNetworkState: MutableLiveData<NetworkStatus> =
         MutableLiveData(NetworkStatusListener.getStatus())
 
-    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -71,7 +71,7 @@ class MainActivity : ComponentActivity(), CatalogComponentCallback, AlbumDetails
      */
     override fun select(album: Album) {
         albumDetailsViewModel.setAlbum(album)
-        navController.navigate("album_detail")
+        navController.navigate(NavigationScreen.AlbumDetails.route)
     }
 
     override fun refresh() {
