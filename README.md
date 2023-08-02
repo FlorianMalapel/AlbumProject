@@ -40,7 +40,6 @@ I received an endpoint which gave me a list of object like this:
         "url": "https://via.placeholder.com/600/24f355",
         "thumbnailUrl": "https://via.placeholder.com/150/24f355"
     }
-    ...
 ]
 ```
 
@@ -68,7 +67,8 @@ Compose allow to build views a lot faster than the old XML way of building it, i
 
 ## Screenshots
 
-The app has a simple design: 
+The app has a simple design:
+
 ![App Screenshot](https://github.com/FlorianMalapel/AlbumProject/blob/feature/unitTests/screenshots/Screenshot_20230802-114052.png?raw=true)
 
 
@@ -76,9 +76,11 @@ The app has a simple design:
 
 
 It can handle network connexion changes:
+
 ![App Screenshot](https://github.com/FlorianMalapel/AlbumProject/blob/feature/unitTests/screenshots/Screenshot_20230802-114037.png?raw=true)
 
 Large screen compatibility:
+
 ![App Screenshot](https://github.com/FlorianMalapel/AlbumProject/blob/feature/unitTests/screenshots/Screenshot_20230802-113418.png?raw=true)
 
 
@@ -86,6 +88,7 @@ Large screen compatibility:
 
 
 Landscape configuration compatibility:
+
 ![App Screenshot](https://github.com/FlorianMalapel/AlbumProject/blob/feature/unitTests/screenshots/Screenshot_20230802-113651.png?raw=true)
 
 
@@ -93,6 +96,7 @@ Landscape configuration compatibility:
 
 
 Dark mode configuration compatibility:
+
 ![App Screenshot](https://github.com/FlorianMalapel/AlbumProject/blob/feature/unitTests/screenshots/Screenshot_20230802-113900.png?raw=true)
 
 
