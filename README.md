@@ -106,9 +106,9 @@ Dark mode configuration compatibility:
 
 
 ## Tests
-Both `Album`and `Track` are tested using `junit` to be sure that the data are well pass from a level to an other of the clean architecture.
+Both `Album`and `Track` mappers are tested using `junit` to be sure that the data are well pass from a level to an other of the clean architecture.
 
-An other test try a basic journey of the app, the be sure that the data are well received, displayed. 
+An other test try a basic journey of the app, to be sure that the data are well received, displayed. 
 
 
 ## Apk 
