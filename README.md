@@ -69,38 +69,38 @@ Compose allow to build views a lot faster than the old XML way of building it, i
 
 The app has a simple design:
 
-![App Screenshot](https://github.com/FlorianMalapel/AlbumProject/blob/feature/unitTests/screenshots/Screenshot_20230802-114052.png?raw=true)
+![App Screenshot](https://github.com/FlorianMalapel/AlbumProject/blob/main/screenshots/Screenshot_20230802-114052.png?raw=true)
 
 
-![App Screenshot](https://github.com/FlorianMalapel/AlbumProject/blob/feature/unitTests/screenshots/Screenshot_20230802-114109.png?raw=true)
+![App Screenshot](https://github.com/FlorianMalapel/AlbumProject/blob/main/screenshots/Screenshot_20230802-114109.png?raw=true)
 
 
 It can handle network connexion changes:
 
-![App Screenshot](https://github.com/FlorianMalapel/AlbumProject/blob/feature/unitTests/screenshots/Screenshot_20230802-114037.png?raw=true)
+![App Screenshot](https://github.com/FlorianMalapel/AlbumProject/blob/main/screenshots/Screenshot_20230802-114037.png?raw=true)
 
 Large screen compatibility:
 
-![App Screenshot](https://github.com/FlorianMalapel/AlbumProject/blob/feature/unitTests/screenshots/Screenshot_20230802-113418.png?raw=true)
+![App Screenshot](https://github.com/FlorianMalapel/AlbumProject/blob/main/screenshots/Screenshot_20230802-113418.png?raw=true)
 
 
-![App Screenshot](https://github.com/FlorianMalapel/AlbumProject/blob/feature/unitTests/screenshots/Screenshot_20230802-113425.png?raw=true)
+![App Screenshot](https://github.com/FlorianMalapel/AlbumProject/blob/main/screenshots/Screenshot_20230802-113425.png?raw=true)
 
 
 Landscape configuration compatibility:
 
-![App Screenshot](https://github.com/FlorianMalapel/AlbumProject/blob/feature/unitTests/screenshots/Screenshot_20230802-113651.png?raw=true)
+![App Screenshot](https://github.com/FlorianMalapel/AlbumProject/blob/main/screenshots/Screenshot_20230802-113651.png?raw=true)
 
 
-![App Screenshot](https://github.com/FlorianMalapel/AlbumProject/blob/feature/unitTests/screenshots/Screenshot_20230802-113636.png?raw=true)
+![App Screenshot](https://github.com/FlorianMalapel/AlbumProject/blob/main/screenshots/Screenshot_20230802-113636.png?raw=true)
 
 
 Dark mode configuration compatibility:
 
-![App Screenshot](https://github.com/FlorianMalapel/AlbumProject/blob/feature/unitTests/screenshots/Screenshot_20230802-113900.png?raw=true)
+![App Screenshot](https://github.com/FlorianMalapel/AlbumProject/blob/main/screenshots/Screenshot_20230802-113900.png?raw=true)
 
 
-![App Screenshot](https://github.com/FlorianMalapel/AlbumProject/blob/feature/unitTests/screenshots/Screenshot_20230802-113907.png?raw=true)
+![App Screenshot](https://github.com/FlorianMalapel/AlbumProject/blob/main/screenshots/Screenshot_20230802-113907.png?raw=true)
 
 
 
@@ -109,6 +109,11 @@ Dark mode configuration compatibility:
 Both `Album`and `Track` are tested using `junit` to be sure that the data are well pass from a level to an other of the clean architecture.
 
 An other test try a basic journey of the app, the be sure that the data are well received, displayed. 
+
+
+## Apk 
+If you want to try this app, you can download an apk with this link:
+https://drive.google.com/file/d/139RXb4fbtN9Of-ueG5rlH_wVwXQL8sRQ/view?usp=sharing
 
 
 
